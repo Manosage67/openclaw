@@ -17,7 +17,7 @@ RUN if [ -n "$OPENCLAW_DOCKER_APT_PACKAGES" ]; then \
     fi
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml .npmrc ./
-COPY ui/package.json ./ui/package.json
+RUN python3 -m ensurepip --default-pip && python3 -m pip install --upgrade pip
 COPY patches ./patches
 COPY scripts ./scripts
 
