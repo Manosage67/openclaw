@@ -3,16 +3,16 @@ nixPkgs = ["python311", "nodejs_22", "pnpm"]
 
 [phases.install]
 cmds = [
-  "python3 -m ensurepip --upgrade",
-  "python3 -m pip install --upgrade pip setuptools wheel",
-  "python3 -m pip install -r requirements.txt",
+  "python3 -m venv .venv",
+  ". .venv/bin/activate && pip install --upgrade pip setuptools wheel",
+  ". .venv/bin/activate && pip install -r requirements.txt",
   "pnpm install --no-frozen-lockfile"
 ]
 
 [phases.build]
 cmds = [
-  "echo 'Skipping UI build on Railway'"
+  "echo 'Skipping UI build'"
 ]
 
 [start]
-cmd = "python3 -m openclaw.app"
+cmd = ". .venv/bin/activate && python -m openclaw.app"
